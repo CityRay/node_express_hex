@@ -58,6 +58,15 @@ const postController = {
       console.error(error);
       handleResponse(res, 400, null, error.message, error);
     }
+  },
+  async deleteAllPost(req: Request, res: Response) {
+    try {
+      await Post.deleteMany();
+      handleResponse(res, 200, [], '刪除成功');
+    } catch (error: any) {
+      console.error(error);
+      handleResponse(res, 400, null, error.message, error);
+    }
   }
 };
 

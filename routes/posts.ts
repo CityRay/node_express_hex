@@ -9,6 +9,9 @@ router.get('/', postController.getPosts);
 // 新增文章
 router.post('/', postController.createPost);
 
+// 刪除全部文章
+router.delete('/all', postController.deleteAllPost);
+
 // 刪除文章
 router.delete('/:id', postController.deletePost);
 
