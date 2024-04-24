@@ -19,8 +19,6 @@ const handleResponse = (
       error
     });
   }
-
-  res.end();
 };
 
 export default handleResponse;

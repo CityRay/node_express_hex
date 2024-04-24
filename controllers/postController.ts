@@ -38,10 +38,12 @@ const postController = {
         const postData = await Post.findByIdAndUpdate(_id, body);
         if (!postData) {
           throw new Error('找不到文章');
+        } else {
+          handleResponse(res, 200, { _id: postData._id }, '更新成功');
         }
-        handleResponse(res, 200, { _id: postData._id }, '更新成功');
+      } else {
+        throw new Error('請確認欄位是否填寫完整');
       }
-      throw new Error('請確認欄位是否填寫完整');
     } catch (error: any) {
       console.error(error);
       handleResponse(res, 400, null, error.message, error);
