@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
+import { type Request, type Response } from 'express';
 import handleResponse from '../services/handleResponse';
 import User from '../models/user';
-import { UserResult } from '../type/user';
+import { type UserResult } from '../type/user';
 
 const userController = {
   // 取得全部
@@ -17,7 +17,7 @@ const userController = {
         throw new Error('ID is required');
       }
 
-      const userData = (await User.findOne({ _id })) as UserResult;
+      const userData: UserResult = (await User.findOne({ _id }))!;
       if (!userData) {
         throw new Error('找不到使用者');
       }
