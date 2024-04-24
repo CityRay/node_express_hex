@@ -1,6 +1,12 @@
-import { Response } from 'express';
+import { type Response } from 'express';
 
-const handleResponse = (res: Response, status = 200, data: any, message = '', error = null) => {
+const handleResponse = (
+  res: Response,
+  status = 200,
+  data: any,
+  message: any = '',
+  error?: any
+): void => {
   if (status === 200) {
     res.json({
       status: true,

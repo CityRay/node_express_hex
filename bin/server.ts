@@ -5,7 +5,7 @@
  */
 
 import app from '../app';
-import { HttpError } from 'http-errors';
+import { type HttpError } from 'http-errors';
 import http from 'http';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -15,7 +15,7 @@ const debug = require('debug')('express-project:server');
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT ?? '3000');
 app.set('port', port);
 
 /**
@@ -36,7 +36,7 @@ server.on('listening', onListening);
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val: string) {
+function normalizePort(val: string): any {
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -56,7 +56,7 @@ function normalizePort(val: string) {
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error: HttpError) {
+function onError(error: HttpError): void {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -82,7 +82,7 @@ function onError(error: HttpError) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
+function onListening(): void {
   const addr = server.address();
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr!.port;
   debug('Listening on ' + bind);

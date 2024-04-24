@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
+import { type Request, type Response } from 'express';
 import handleResponse from '../services/handleResponse';
 import Post from '../models/post';
-import { PostResult } from '../type/post';
+import { type PostResult } from '../type/post';
 
 const postController = {
   // 取得全部文章
@@ -14,7 +14,7 @@ const postController = {
     try {
       const { body } = req;
 
-      if (body && body.title && body.content) {
+      if (body?.title && body.content) {
         const newPost = await Post.create(body);
         handleResponse(res, 200, newPost, '新增成功');
       } else {
@@ -33,12 +33,15 @@ const postController = {
         throw new Error('ID is required');
       }
 
-      const { body } = req;
-      const postData = await Post.findByIdAndUpdate(_id, body);
-      if (!postData) {
-        throw new Error('找不到文章');
+      const { body } = req as { body: PostResult };
+      if (body?.title && body.content) {
+        const postData = await Post.findByIdAndUpdate(_id, body);
+        if (!postData) {
+          throw new Error('找不到文章');
+        }
+        handleResponse(res, 200, { _id: postData._id }, '更新成功');
       }
-      handleResponse(res, 200, { _id: postData._id }, '更新成功');
+      throw new Error('請確認欄位是否填寫完整');
     } catch (error: any) {
       console.error(error);
       handleResponse(res, 400, null, error.message, error);
