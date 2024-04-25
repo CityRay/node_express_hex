@@ -19,10 +19,6 @@
   "plugins": ["@typescript-eslint", "import", "unicorn", "prettier"],
   "rules": {
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
-    // allow any
-    "@typescript-eslint/no-explicit-any": "off",
-    // 允許未使用變數
-    "@typescript-eslint/no-unused-vars": "off",
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
     "space-in-parens": ["error", "never"],
     "no-promise-executor-return": "error",
@@ -48,7 +44,25 @@
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
-    "unicorn/filename-case": ["error", { "case": "camelCase" }],
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "camelCase": true,
+          "pascalCase": true
+        }
+      }
+    ],
+    "unicorn/no-array-push-push": [
+      "error",
+      {
+        "ignore": ["readable", "foo.stream"]
+      }
+    ],
+    // allow any
+    "@typescript-eslint/no-explicit-any": "off",
+    // 允許未使用變數
+    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/unbound-method": "off",
