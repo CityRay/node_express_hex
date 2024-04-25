@@ -1,12 +1,15 @@
 import { type Request, type Response } from 'express';
 import handleResponse from '../services/handleResponse';
-import Post from '../models/post';
+import Post from '../models/postModel';
 import { type PostResult } from '../type/post';
 
 const postController = {
   // 取得全部文章
   async getPosts(req: Request, res: Response) {
-    const posts: PostResult[] = await Post.find();
+    const posts: PostResult[] = await Post.find().populate({
+      path: 'user', // user 欄位
+      select: 'name photo'
+    });
     handleResponse(res, 200, posts, '取得成功');
   },
   // 新增文章

@@ -1,11 +1,12 @@
-import { Schema, model } from 'mongoose';
+import { type Model, Schema, model } from 'mongoose';
 import type { PostModel } from '../type/post';
 
-const postSchema = new Schema<PostModel>(
+const postSchema = new Schema<PostModel, Model<PostModel>>(
   {
-    name: {
-      type: String,
-      required: [true, '姓名未填寫']
+    user: {
+      type: Schema.ObjectId,
+      ref: 'User', // Model 定義的名稱
+      required: [true, '使用者未填寫']
     },
     title: {
       type: String,
@@ -14,10 +15,6 @@ const postSchema = new Schema<PostModel>(
     content: {
       type: String,
       required: [true, '文章內容未填寫']
-    },
-    description: {
-      type: String,
-      default: ''
     },
     tag: {
       type: [String],

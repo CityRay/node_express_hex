@@ -1,6 +1,6 @@
 import { type Request, type Response } from 'express';
 import handleResponse from '../services/handleResponse';
-import User from '../models/user';
+import User from '../models/userModel';
 import { type UserResult } from '../type/user';
 
 const userController = {

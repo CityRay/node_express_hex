@@ -1,8 +1,9 @@
+import { type Types } from 'mongoose';
+
 export interface PostModel {
-  name: string;
+  user: Types.ObjectId;
   title: string;
   content: string;
-  description: string;
   tag: string[];
   image: string;
   likes: number;
@@ -12,4 +13,6 @@ export interface PostModel {
 
 export interface PostResult extends PostModel {
   _id: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

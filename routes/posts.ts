@@ -16,10 +16,9 @@ router.get(
         "status": true,
         "data": [{
           "_id": "661f4919e7a934d777e3cf1f",
-          "name": "name",
+          "user": "661f4919e7a934d77",
           "title": "title",
           "content": "content",
-          "description": "description9",
           "tag": [
             "教學"
           ],
@@ -46,10 +45,9 @@ router.post(
         description: '新增文章',
         required: true,
         schema: {
-          $name: 'name',
+          $user: '662a1a9ce3a68306b1ccac02',
           $title: 'title',
           $content: 'content',
-          $description: 'description',
           $tag: ['教學'],
           image: 'https://placehold.co/600x400',
           isPublic: true
