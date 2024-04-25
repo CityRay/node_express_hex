@@ -7,6 +7,10 @@ import logger from 'morgan';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+// swagger
+import swaggerUi from 'swagger-ui-express';
+import swaggerFile from './swagger-output.json';
+
 // router
 import postsRouter from './routes/posts';
 import userRouter from './routes/user';
@@ -33,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Route
 app.use('/api/user', userRouter);
 app.use('/api/post', postsRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
