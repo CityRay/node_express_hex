@@ -1,15 +1,26 @@
 import { type Request, type Response } from 'express';
 import handleResponse from '../services/handleResponse';
 import Post from '../models/postModel';
-import { type PostResult } from '../type/post';
+import { type PostModel, type PostResult } from '../type/post';
+import { type FilterQuery } from 'mongoose';
 
 const postController = {
   // 取得全部文章
   async getPosts(req: Request, res: Response) {
-    const posts: PostResult[] = await Post.find().populate({
-      path: 'user', // user 欄位
-      select: 'name photo'
-    });
+    // asc 遞增(由小到大，由舊到新) : 1
+    // desc 遞減(由大到小、由新到舊) : -1
+    const timeSort = req.query.timeSort === 'asc' ? 1 : -1;
+    const q: FilterQuery<PostModel> =
+      req.query.q !== undefined ? { content: new RegExp(String(req.query.q)) } : {};
+
+    const posts: PostResult[] = await Post.find(q)
+      .populate({
+        path: 'user', // user 欄位
+        select: 'name photo'
+      })
+      .sort({ createdAt: timeSort })
+      .lean();
+
     handleResponse(res, 200, posts, '取得成功');
   },
   // 新增文章
