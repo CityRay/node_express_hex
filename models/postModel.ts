@@ -39,7 +39,7 @@ const postSchema = new Schema<PostModel, Model<PostModel>>(
     },
     isPublic: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   {
